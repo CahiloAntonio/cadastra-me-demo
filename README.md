@@ -15,7 +15,7 @@
 
 ## Sobre
 
-Em zonas com pouca ou nenhuma internet, perder um cadastro ou duplicá-lo ao reenviar é um problema real. Esta demo mostra, num único ficheiro HTML sem dependências, como resolver isso no navegador:
+Em zonas com pouca ou nenhuma internet, perder um cadastro ou duplicá-lo ao reenviar é um problema real. Esta demo mostra, numa página simples, sem dependências nem etapa de build, como resolver isso no navegador:
 
 1. O utilizador regista um funcionário, **mesmo sem rede**.
 2. Os dados são **cifrados** (AES-GCM de 256 bits) antes de entrarem na fila local (IndexedDB).
