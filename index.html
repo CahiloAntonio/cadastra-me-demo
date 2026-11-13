@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastra.me Demo</title>
+  <meta name="description" content="Demonstração de cadastro offline-first com cifra local AES-GCM e sincronização idempotente. Dados fictícios.">
+  <meta name="theme-color" content="#0b5fff">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <div>
+      <h1>Cadastra.me <span class="tag">Demo</span></h1>
+      <p class="sub">Cadastro offline-first, cifra local e sincronização idempotente. Dados fictícios, tudo no seu navegador.</p>
+    </div>
+    <span id="estado-rede" class="badge badge-ok" aria-live="polite">Online</span>
+  </header>
+
+  <main class="grelha">
+    <section class="cartao" aria-labelledby="t-form">
+      <h2 id="t-form">Novo funcionário</h2>
+      <form id="form" novalidate autocomplete="off">
+        <label for="nome">Nome completo</label>
+        <input id="nome" name="nome" type="text" required>
+        <small id="erro-nome" class="erro" role="alert"></small>
+
+        <label for="bi">BI</label>
+        <input id="bi" name="bi" type="text" placeholder="000000001LA001" maxlength="14" required>
+        <small id="erro-bi" class="erro" role="alert"></small>
+
+        <div class="duas">
+          <div>
+            <label for="agente">Nº de agente</label>
+            <input id="agente" name="agente" type="text" inputmode="numeric" required>
+            <small id="erro-agente" class="erro" role="alert"></small>
+          </div>
+          <div>
+            <label for="telefone">Telefone</label>
+            <input id="telefone" name="telefone" type="tel" inputmode="numeric" placeholder="923000001" required>
+            <small id="erro-telefone" class="erro" role="alert"></small>
+          </div>
+        </div>
+
+        <label for="escola">Escola</label>
+        <select id="escola" name="escola" required>
+          <option value="">Selecione…</option>
+          <option>Escola Demo n.º 1 (Município Exemplo)</option>
+          <option>Escola Demo n.º 2 (Município Exemplo)</option>
+          <option>Escola Demo n.º 3 (Localidade Teste)</option>
+        </select>
+        <small id="erro-escola" class="erro" role="alert"></small>
+
+        <div class="acoes">
+          <button type="submit" class="primario">Cadastrar</button>
+          <button type="button" id="btn-exemplo">Preencher exemplo</button>
+        </div>
+      </form>
+
+      <fieldset class="simulacao">
+        <legend>Simulação de rede</legend>
+        <label class="check"><input type="checkbox" id="offline"> Modo offline</label>
+        <label class="check"><input type="checkbox" id="perder"> Perder a confirmação do servidor (1×)</label>
+        <div class="acoes">
+          <button type="button" id="btn-sync">Sincronizar agora</button>
+          <button type="button" id="btn-repor" class="perigo">Repor demo</button>
+        </div>
+      </fieldset>
+    </section>
+
+    <section class="cartao" aria-labelledby="t-fila">
+      <h2 id="t-fila">Fila local (cifrada) <span id="contador-fila" class="contador">0</span></h2>
+      <p class="nota">Os dados ficam em IndexedDB, cifrados com uma chave AES-GCM de 256 bits não exportável.</p>
+      <p id="fila-vazia" class="vazio">Sem pendências.</p>
+      <ul id="fila" class="lista"></ul>
+    </section>
+
+    <section class="cartao" aria-labelledby="t-srv">
+      <h2 id="t-srv">Servidor simulado <span id="contador-servidor" class="contador">0</span></h2>
+      <p class="nota">Recibos por <code>client_id</code> e <code>payload_hash</code> evitam duplicados em reenvios.</p>
+      <p id="servidor-vazio" class="vazio">Sem funcionários registados.</p>
+      <table>
+        <thead><tr><th>ID</th><th>Nome</th><th>BI</th><th>Escola</th></tr></thead>
+        <tbody id="tabela-servidor"></tbody>
+      </table>
+    </section>
+
+    <section class="cartao largo" aria-labelledby="t-log">
+      <h2 id="t-log">Registo de eventos</h2>
+      <ul id="log" class="log" aria-live="polite"></ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    Projeto de demonstração de <a href="https://github.com/CahiloAntonio">Cahilo Antonio</a> · Antonio-Dev.
+    Não contém código nem dados de nenhum cliente.
+  </footer>
+
+  <script src="validacoes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

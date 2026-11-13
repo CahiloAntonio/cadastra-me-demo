@@ -1,0 +1,14 @@
+{
+  "name": "Cadastra.me Demo",
+  "short_name": "Cadastra Demo",
+  "description": "Demonstração de cadastro offline-first com cifra local e sincronização idempotente.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#0b5fff",
+  "lang": "pt-PT",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
